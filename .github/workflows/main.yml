@@ -28,7 +28,14 @@ jobs:
         run: |
           cd backend
           docker run -d -p 8000:8000 --name backend-container backend:latest
+
+      - name: Api call server
+        run: |      
           curl 127.0.0.1:8000/demoapp/allBooks
+
+      - name: Clean up docker containers and images
+        run: |
+          cd backend
           docker stop backend-container
           docker rm backend-container
           docker rmi backend
