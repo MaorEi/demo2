@@ -6,21 +6,29 @@ jobs:
   first-job:
     runs-on: self-hosted
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
 
-      - name: Running django server
+      - name: Build the Docker image
         env:
           POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
           POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
           POSTGRES_HOST: ${{ secrets.POSTGRES_HOST }}
           SECRET_KEY: ${{ secrets.SECRET_KEY }}
           DEBUG: ${{ secrets.DEBUG }}
+          ALLOWED_HOST: ${{ secrets.ALLOWED_HOST }}
         run: |
           cd backend
-          python -m pip install -r requirements.txt
-          cd demoproject
-          python manage.py runserver
+          docker build --build-arg POSTGRES_USER=demodb --build-arg POSTGRES_PASSWORD=demo123! --build-arg POSTGRES_HOST=demo-db-identifier.clk8e4y8q1sy.us-east-2.rds.amazonaws.com --build-arg SECRET_KEY=django-insecure-i4_qg^ud5w8n-sw6ny3efg6q54%mz5b27i=tlc%*seeqzb+uh# --build-arg DEBUG=True --build-arg ALLOWED_HOST=127.0.0.1 -t backend .
+
+      - name: Running django server
+        run: |
+          cd backend
+          docker run -d -p 8000:8000 --name backend-container backend:latest
+          curl 127.0.0.1:8000/demoapp/allBooks
+          docker stop backend-container
+          docker rm backend-container
+          docker rmi backend
