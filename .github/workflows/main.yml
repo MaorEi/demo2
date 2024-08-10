@@ -22,7 +22,7 @@ jobs:
           ALLOWED_HOST: ${{ secrets.ALLOWED_HOST }}
         run: |
           cd backend
-          docker build --build-arg POSTGRES_USER=demodb --build-arg POSTGRES_PASSWORD=demo123! --build-arg POSTGRES_HOST=demo-db-identifier.clk8e4y8q1sy.us-east-2.rds.amazonaws.com --build-arg SECRET_KEY=django-insecure-i4_qg^ud5w8n-sw6ny3efg6q54%mz5b27i=tlc%*seeqzb+uh# --build-arg DEBUG=True --build-arg ALLOWED_HOST=127.0.0.1 -t backend .
+          docker build --build-arg POSTGRES_USER=$POSTGRES_USER --build-arg POSTGRES_PASSWORD=$POSTGRES_PASSWORD --build-arg POSTGRES_HOST=$POSTGRES_HOST --build-arg SECRET_KEY=$SECRET_KEY --build-arg DEBUG=$DEBUG --build-arg ALLOWED_HOST=$ALLOWED_HOST -t backend .
 
       - name: Running django server
         run: |
