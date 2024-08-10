@@ -1,23 +1,26 @@
 name: First Workflow
+
 on: workflow_dispatch
+
 jobs:
   first-job:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+
       - name: Running django server
         env:
-          POSTGRES_USER: {{ secrets.POSTGRES_USER }}
-          POSTGRES_PASSWORD: {{ secrets.POSTGRES_PASSWORD }}
-          POSTGRES_HOST: {{ secrets.POSTGRES_HOST }}
-          SECRET_KEY: {{ secrets.SECRET_KEY }}
-          DEBUG: {{ secrets.DEBUG }}
+          POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+          POSTGRES_HOST: ${{ secrets.POSTGRES_HOST }}
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+          DEBUG: ${{ secrets.DEBUG }}
         run: |
           cd demo2/backend
           python -m pip install -r requirements.txt
           cd demoproject
           python manage.py runserver
-      
