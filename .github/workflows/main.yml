@@ -21,14 +21,14 @@ jobs:
 
       - name: Clean up Docker resources
         run: |
-          docker system prune -f
-          docker container prune -f
-          docker volume prune -f
-          docker network prune -f
+          sudo docker system prune -f
+          sudo docker container prune -f
+          sudo docker volume prune -f
+          sudo docker network prune -f
 
       - name: Remove existing Buildx builder
         run: |
-          docker buildx rm builder || true
+          sudo docker buildx rm builder || true
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
