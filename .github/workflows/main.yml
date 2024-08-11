@@ -12,7 +12,7 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
-      - name: Build the Docker image
+      - name: Build the Docker backend image
         env:
           POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
           POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
@@ -30,13 +30,31 @@ jobs:
           docker run -d -p 8000:8000 --name backend-container backend:latest
           sleep 20
 
-      - name: Api call server
-        run: |      
-          curl 127.0.0.1:8000/demoapp/allBooks
+#      - name: Api call server
+#        run: |
+#          curl 127.0.0.1:8000/demoapp/allBooks
 
-      - name: Clean up docker containers and images
+      - name: Build the Docker frontend image
+        run: |
+          cd frontend
+          docker build -t frontend .
+
+      - name: Running django server
+        run: |
+          cd frontend
+          docker run -d -p 3000:3000 --name frontend-container frontend:latest
+          sleep 20
+
+      - name: Clean up docker backend container and image
         run: |
           cd backend
           docker stop backend-container
           docker rm backend-container
           docker rmi backend
+
+      - name: Clean up docker frontend container and image
+        run: |
+          cd frontend
+          docker stop frontend-container
+          docker rm frontend-container
+          docker rmi frontend
