@@ -4,7 +4,7 @@ const App = () => {
   const [books, setBooks] = useState([]);
 
   useEffect(() => {
-    fetch('http://127.0.0.1:8000/demoapp/allBooks')
+    fetch(`http://${process.env.REACT_APP_ALLOWED_HOST}:8000/demoapp/allBooks`)
       .then(response => response.json())
       .then(data => setBooks(data.books)) // Access the 'books' property of the response
       .catch(error => console.error('Error fetching data:', error));
