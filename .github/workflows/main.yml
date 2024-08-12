@@ -9,29 +9,29 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Install Docker
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y docker.io
-          sudo systemctl start docker
-          sudo systemctl enable docker
+#      - name: Install Docker
+#        run: |
+#          sudo apt-get update
+#          sudo apt-get install -y docker.io
+#          sudo systemctl start docker
+#          sudo systemctl enable docker
+#
+#      - name: Ensure Docker is running
+#        run: sudo systemctl start docker
+#
+#      - name: Clean up Docker resources
+#        run: |
+#          sudo docker system prune -f
+#          sudo docker container prune -f
+#          sudo docker volume prune -f
+#          sudo docker network prune -f
+#
+#      - name: Remove existing Buildx builder
+#        run: |
+#          sudo docker buildx rm builder || true
 
-      - name: Ensure Docker is running
-        run: sudo systemctl start docker
-
-      - name: Clean up Docker resources
-        run: |
-          sudo docker system prune -f
-          sudo docker container prune -f
-          sudo docker volume prune -f
-          sudo docker network prune -f
-
-      - name: Remove existing Buildx builder
-        run: |
-          sudo docker buildx rm builder || true
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
+#      - name: Set up Docker Buildx
+#        uses: docker/setup-buildx-action@v2
 
       - name: Build the Docker backend image
         env:
@@ -66,16 +66,16 @@ jobs:
           docker run -d -p 3000:3000 --name frontend-container frontend:latest
           sleep 20
 
-      - name: Clean up docker backend container and image
-        run: |
-          cd backend
-          docker stop backend-container
-          docker rm backend-container
-          docker rmi backend
-
-      - name: Clean up docker frontend container and image
-        run: |
-          cd frontend
-          docker stop frontend-container
-          docker rm frontend-container
-          docker rmi frontend
+#      - name: Clean up docker backend container and image
+#        run: |
+#          cd backend
+#          docker stop backend-container
+#          docker rm backend-container
+#          docker rmi backend
+#
+#      - name: Clean up docker frontend container and image
+#        run: |
+#          cd frontend
+#          docker stop frontend-container
+#          docker rm frontend-container
+#          docker rmi frontend
