@@ -27,8 +27,10 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG').lower() == 'true'
 
-CORS_ALLOWED_ORIGINS = ['http://localhost:3000', 'http://127.0.0.1:3000',
-                        'http://' + os.getenv('CORS_ALLOWED_ORIGIN') + ':3000']
+# CORS_ALLOWED_ORIGINS = ['http://localhost:3000', 'http://127.0.0.1:3000',
+#                         'http://' + os.getenv('CORS_ALLOWED_ORIGIN') + ':3000']
+
+CORS_ALLOW_ALL_ORIGINS = True
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', os.getenv('REACT_APP_ALLOWED_HOST')]
 
