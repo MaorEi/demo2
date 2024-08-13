@@ -25,6 +25,8 @@ services:
       DEBUG: ${DEBUG}
       CORS_ALLOWED_ORIGIN: ${CORS_ALLOWED_ORIGIN}
       REACT_APP_ALLOWED_HOST: ${REACT_APP_ALLOWED_HOST}
+    networks:
+      - my-network
 
   frontend:
     build:
@@ -39,3 +41,9 @@ services:
     environment:
       NODE_ENV: production
       REACT_APP_ALLOWED_HOST: ${REACT_APP_ALLOWED_HOST}
+    networks:
+      - my-network
+
+networks:
+  my-network:
+    driver: bridge
