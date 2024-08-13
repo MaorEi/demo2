@@ -9,8 +9,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-#      - name: Set up Docker Buildx
-#        uses: docker/setup-buildx-action@v2
+      #      - name: Set up Docker Buildx
+      #        uses: docker/setup-buildx-action@v2
 
       - name: Build the Docker backend image
         env:
@@ -23,7 +23,7 @@ jobs:
           REACT_APP_ALLOWED_HOST: ${{ secrets.REACT_APP_ALLOWED_HOST }}
         run: |
           sudo docker-compose -p fullstack down
-          sudo docker-compose -p fullstack up --build -d
+          sudo POSTGRES_USER=$POSTGRES_USER POSTGRES_PASSWORD=$POSTGRES_PASSWORD POSTGRES_HOST=$POSTGRES_HOST SECRET_KEY=$SECRET_KEY DEBUG=$DEBUG CORS_ALLOWED_ORIGIN=$CORS_ALLOWED_ORIGIN REACT_APP_ALLOWED_HOST=$REACT_APP_ALLOWED_HOST docker-compose -p fullstack up --build -d
 
 #      - name: Running django server
 #        run: |
