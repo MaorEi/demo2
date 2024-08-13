@@ -31,4 +31,8 @@ ENV DEBUG=${DEBUG}
 ENV CORS_ALLOWED_ORIGIN = ${CORS_ALLOWED_ORIGIN}
 ENV REACT_APP_ALLOWED_HOST=${REACT_APP_ALLOWED_HOST}
 
+RUN python ./demoproject/manage.py makemigrations
+
+RUN python ./demoproject/manage.py migrate
+
 CMD ["python", "./demoproject/manage.py", "runserver", "0.0.0.0:8000"]
