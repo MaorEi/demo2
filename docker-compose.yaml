@@ -11,7 +11,8 @@ services:
         POSTGRES_HOST: ${POSTGRES_HOST}
         SECRET_KEY: ${SECRET_KEY}
         DEBUG: ${DEBUG}
-        ALLOWED_HOST: ${ALLOWED_HOST}
+        CORS_ALLOWED_ORIGIN: ${CORS_ALLOWED_ORIGIN}
+        REACT_APP_ALLOWED_HOST: ${REACT_APP_ALLOWED_HOST}
     image: backend
     container_name: backend-container
     ports:
@@ -22,7 +23,8 @@ services:
       POSTGRES_HOST: ${POSTGRES_HOST}
       SECRET_KEY: ${SECRET_KEY}
       DEBUG: ${DEBUG}
-      ALLOWED_HOST: ${ALLOWED_HOST}
+      CORS_ALLOWED_ORIGIN: ${CORS_ALLOWED_ORIGIN}
+      REACT_APP_ALLOWED_HOST: ${REACT_APP_ALLOWED_HOST}
 
   frontend:
     build:
