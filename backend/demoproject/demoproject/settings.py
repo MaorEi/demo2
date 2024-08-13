@@ -31,8 +31,8 @@ DEBUG = os.getenv('DEBUG').lower() == 'true'
 #                         'http://' + os.getenv('CORS_ALLOWED_ORIGIN') + ':3000']
 
 CORS_ALLOW_ALL_ORIGINS = True
-
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', os.getenv('REACT_APP_ALLOWED_HOST')]
+ALLOWED_HOSTS = ['*']
+# ALLOWED_HOSTS = ['localhost', '127.0.0.1', os.getenv('REACT_APP_ALLOWED_HOST')]
 
 # Application definition
 
