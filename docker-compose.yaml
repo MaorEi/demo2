@@ -13,6 +13,8 @@ services:
         DEBUG: ${DEBUG}
         CORS_ALLOWED_ORIGIN: ${CORS_ALLOWED_ORIGIN}
         REACT_APP_ALLOWED_HOST: ${REACT_APP_ALLOWED_HOST}
+        SUBNET: ${SUBNET}
+        BACKEND_IP: ${BACKEND_IP}
     image: backend
     container_name: backend-container
     ports:
@@ -25,8 +27,11 @@ services:
       DEBUG: ${DEBUG}
       CORS_ALLOWED_ORIGIN: ${CORS_ALLOWED_ORIGIN}
       REACT_APP_ALLOWED_HOST: ${REACT_APP_ALLOWED_HOST}
+      SUBNET: ${SUBNET}
+      BACKEND_IP: ${BACKEND_IP}
     networks:
-      - my-network
+      my-network:
+        ipv4_address: ${BACKEND_IP}
 
   frontend:
     build:
@@ -34,6 +39,7 @@ services:
       dockerfile: Dockerfile
       args:
         REACT_APP_ALLOWED_HOST: ${REACT_APP_ALLOWED_HOST}
+        FRONTEND_IP: ${FRONTEND_IP}
     image: frontend
     container_name: frontend-container
     ports:
@@ -41,9 +47,14 @@ services:
     environment:
       NODE_ENV: production
       REACT_APP_ALLOWED_HOST: ${REACT_APP_ALLOWED_HOST}
+      FRONTEND_IP: ${FRONTEND_IP}
     networks:
-      - my-network
+      my-network:
+        ipv4_address: ${FRONTEND_IP}
 
 networks:
   my-network:
     driver: bridge
+    ipam:
+      config:
+        - subnet: ${SUBNET}
