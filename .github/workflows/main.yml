@@ -22,6 +22,7 @@ jobs:
           CORS_ALLOWED_ORIGIN: ${{ secrets.CORS_ALLOWED_ORIGIN }}
           REACT_APP_ALLOWED_HOST: ${{ secrets.REACT_APP_ALLOWED_HOST }}
         run: |
+          sudo docker-compose -p fullstack down
           sudo docker-compose -p fullstack up --build -d
 
 #      - name: Running django server
