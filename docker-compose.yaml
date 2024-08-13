@@ -29,6 +29,7 @@ services:
       REACT_APP_ALLOWED_HOST: ${REACT_APP_ALLOWED_HOST}
       SUBNET: ${SUBNET}
       BACKEND_IP: ${BACKEND_IP}
+      FRONTEND_IP: ${FRONTEND_IP}
     networks:
       my-network:
         ipv4_address: ${BACKEND_IP}
